@@ -12,8 +12,14 @@ const CreateForm = (options = {}) => WrapperComponent => (
     submitHandler = (e) => {
       e.preventDefault();
       const { submitForm } = this.props;
+      const formEl = [...e.target.elements];
 
-      submitForm(e);
+      submitForm(
+        formEl.reduce((a, b) => {
+          if (b.type !== 'submit') a[b.name] = b.value;
+          return a;
+        }, {}),
+      );
     }
 
     render = () =>
