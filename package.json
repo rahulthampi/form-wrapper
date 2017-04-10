@@ -40,7 +40,6 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
-    "formsy-react": "^0.19.2",
     "react": "^15.5.0",
     "react-dom": "^15.5.0"
   }
