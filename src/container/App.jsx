@@ -15,12 +15,12 @@ class App extends Component {
     this.handleRegistration = this.handleRegistration.bind(this);
   }
 
-  handleLogin = (elements) => {
-    console.log(elements);
+  handleLogin = (data) => {
+    alert(JSON.stringify(data, null, 4));
   }
 
-  handleRegistration = (elements) => {
-    console.log(elements);
+  handleRegistration = (data) => {
+    alert(JSON.stringify(data, null, 4));
   }
 
   render() {
