@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { render } from 'react-dom';
 
-import CreateForm from '../container/CreateFormHOC';
-import Login from '../components/Login';
-import Register from '../components/Register';
+import { CreateFormHOC } from 'form-wrapper';
+import Login from './Login';
+import Register from './Register';
 
-const LoginForm = CreateForm()(Login);
-const RegisterForm = CreateForm()(Register);
+const LoginForm = CreateFormHOC()(Login);
+const RegisterForm = CreateFormHOC()(Register);
 
 class App extends Component {
   constructor(props) {
@@ -33,4 +34,7 @@ class App extends Component {
   }
 }
 
-export default App;
+render(
+  <App />,
+  document.getElementById('example'),
+);

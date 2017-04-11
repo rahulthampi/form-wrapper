@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const CreateForm = (options = {}) => WrapperComponent => (
+const CreateFormHOC = (options = {}) => WrapperComponent =>
   class extends Component {
     constructor(props) {
       super(props);
@@ -33,7 +33,6 @@ const CreateForm = (options = {}) => WrapperComponent => (
     static propTypes = {
       submitForm: PropTypes.func.isRequired,
     };
-  }
-);
+  };
 
-export default CreateForm;
+export default CreateFormHOC;

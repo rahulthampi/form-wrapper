@@ -1,9 +1,9 @@
-import React from 'react';
-import { render } from 'react-dom';
+import CreateFormHOC from './container/CreateFormHOC';
+import Form from './components/Form';
+import Input from './components/Input';
 
-import App from './container/App';
-
-render(
-  <App />,
-  document.getElementById('root'),
-);
+module.exports = {
+  CreateFormHOC,
+  Form,
+  Input,
+};
