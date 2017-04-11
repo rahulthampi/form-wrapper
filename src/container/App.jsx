@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
+import CreateForm from '../container/CreateFormHOC';
 import Login from '../components/Login';
 import Register from '../components/Register';
-import CreateForm from '../container/CreateForm';
 
 const LoginForm = CreateForm()(Login);
 const RegisterForm = CreateForm()(Register);
@@ -26,7 +26,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        Welcome to the App
         <LoginForm submitForm={this.handleLogin} />
         <RegisterForm submitForm={this.handleRegistration} />
       </div>

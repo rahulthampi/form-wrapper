@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextBox = ({ className, name, title, type, value, placeholder }) => {
+const FormInput = ({ className, name, title, type, value, placeholder }) => {
   const wrapperClassName = `input-group ${className}`;
 
   return (
@@ -17,7 +17,7 @@ const TextBox = ({ className, name, title, type, value, placeholder }) => {
   );
 };
 
-TextBox.propTypes = {
+FormInput.propTypes = {
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
   title: PropTypes.string,
@@ -26,7 +26,7 @@ TextBox.propTypes = {
   placeholder: PropTypes.string,
 };
 
-TextBox.defaultProps = {
+FormInput.defaultProps = {
   className: '',
   type: 'text',
   title: undefined,
@@ -34,4 +34,4 @@ TextBox.defaultProps = {
   placeholder: undefined,
 };
 
-export default TextBox;
+export default FormInput;
