@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Form from './Form';
-import FormInput from './FormInput';
+import FormInput from './Input';
 
 const Login = ({ submit }) => (
   <Form formID="userLogin" submit={submit} formTitle="User Login">
