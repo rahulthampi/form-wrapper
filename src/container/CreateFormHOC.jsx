@@ -14,11 +14,15 @@ const CreateForm = (options = {}) => WrapperComponent => (
       const { submitForm } = this.props;
       const formId = e.target.id;
       const formEl = [...e.target.elements];
+      const formValues = formEl
+        .filter(el => el.type !== 'submit')
+        .reduce((acc, el) => ({
+          ...acc,
+          [el.name]: el.value,
+        }), {});
+
       submitForm(
-        formEl.reduce((a, b) => {
-          if (b.type !== 'submit') a[b.name] = b.value;
-          return a;
-        }, {}),
+        formValues,
         formId,
       );
     }
