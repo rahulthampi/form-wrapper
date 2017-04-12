@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import CreateFormHOC from 'form-wrapper';
 
-import { CreateFormHOC } from 'form-wrapper';
 import Login from './Login';
 import Register from './Register';
 
@@ -28,6 +28,8 @@ class App extends Component {
     return (
       <div>
         <LoginForm submitForm={this.handleLogin} />
+        <br />
+        <br />
         <RegisterForm submitForm={this.handleRegistration} />
       </div>
     );

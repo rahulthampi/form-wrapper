@@ -1,13 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   devtool: 'inline-source-map',
 
-  entry: `${path.resolve(__dirname, 'user')}/app.jsx`,
+  entry: path.resolve(__dirname, 'user', 'app.jsx'),
 
   output: {
-    path: `${path.resolve(__dirname, '__build__')}`,
+    path: path.resolve(__dirname, '__build__'),
     filename: '[name].js',
     chunkFilename: '[id].chunk.js',
     publicPath: '/__build__/',
@@ -24,7 +25,6 @@ module.exports = {
           plugins: [
             'transform-class-properties',
             'transform-object-rest-spread',
-            "add-module-exports",
           ],
         },
       },
@@ -60,5 +60,6 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
     }),
+    // new BundleAnalyzerPlugin(),
   ],
 };

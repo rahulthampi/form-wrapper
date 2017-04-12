@@ -6,7 +6,6 @@ const Form = ({ formID, submit, formTitle, children }) => (
     {formTitle && <div>{formTitle}</div>}
     {' '}
     {children}
-    <button type="submit">Submit</button>
   </form>
 );
 

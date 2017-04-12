@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { Form, Input } from 'form-wrapper';
 
 const Register = ({ submit }) => (
@@ -10,6 +9,7 @@ const Register = ({ submit }) => (
     <Input type="email" title="EmailID" name="userEmail" placeholder="Email address" />
     <Input type="password" title="Password" name="userPassword" placeholder="Password" />
     <Input type="password" title="Confirm Password" name="userConfirmPassword" placeholder="Confirm Password" />
+    <button type="submit">Submit</button>
   </Form>
 );
 
