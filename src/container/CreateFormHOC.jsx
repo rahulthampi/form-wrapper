@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const CreateFormHOC = (options = {}) => WrapperComponent =>
-  class extends Component {
+  class FormWrapper extends Component {
     constructor(props) {
       super(props);
 

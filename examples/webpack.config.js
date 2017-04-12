@@ -18,6 +18,10 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
+        include: [
+          /src/,
+          /examples/,
+        ],
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
@@ -50,7 +54,7 @@ module.exports = {
     contentBase: path.resolve(__dirname),
     historyApiFallback: true,
     hot: true,
-    port: 3030,
+    port: 3000,
     compress: true,
     overlay: true,
   },
