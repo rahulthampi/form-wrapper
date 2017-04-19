@@ -13,22 +13,23 @@ const CreateFormHOC = (options = {}) => WrapperComponent =>
       e.preventDefault();
       const { submitForm } = this.props;
       const formId = e.target.id;
-      const formEl = [...e.target.elements];
-      const formValues = formEl
+      const formValues = [...e.target.elements]
         .filter(el => el.type !== 'submit')
         .reduce((acc, el) => ({
           ...acc,
           [el.name]: el.value,
-        }), {});
+        }), { formId });
 
       submitForm(
         formValues,
-        formId,
       );
     }
 
     render = () =>
-      <WrapperComponent submit={this.submitHandler} />
+      // console.dir(options.formElements);
+      (
+        <WrapperComponent submit={this.submitHandler} />
+      )
 
     static propTypes = {
       submitForm: PropTypes.func.isRequired,
