@@ -14,18 +14,13 @@ class FormInput extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({
-      value: e.target.value,
-    });
-  };
-
-  validateInput = (e) => {
     const { rule } = this.props;
 
     this.setState({
+      value: e.target.value,
       isValid: Validation[rule](e.target.value),
     });
-  }
+  };
 
   render() {
     const { isValid } = this.state;
@@ -36,7 +31,6 @@ class FormInput extends Component {
       type,
       placeholder,
       required,
-      rule,
       validationMessage,
     } = this.props;
     const wrapperClassName = `input-group ${className}${!isValid && 'validation-error'}`;
@@ -49,7 +43,6 @@ class FormInput extends Component {
           name={name}
           value={this.state.value}
           onChange={this.handleChange}
-          onBlur={rule && this.validateInput}
           placeholder={placeholder}
           required={required}
         />
