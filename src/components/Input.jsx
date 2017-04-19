@@ -23,7 +23,7 @@ class FormInput extends Component {
     const { rule } = this.props;
 
     this.setState({
-      isValid: !Validation[rule](e.target.value),
+      isValid: Validation[rule](e.target.value),
     });
   }
 

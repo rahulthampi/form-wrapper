@@ -8,8 +8,8 @@ const Login = ({ submit }) => (
       label="Email address"
       name="userEmail"
       placeholder="Email address"
-      rule="isEmptyString"
-      validationMessage="is empty"
+      rule="isEmail"
+      validationMessage="not a mail"
       required
     />
     <Input
@@ -17,7 +17,7 @@ const Login = ({ submit }) => (
       type="password"
       name="userPassword"
       placeholder="Password"
-      rule="isEmptyString"
+      rule="isNumeric"
       validationMessage="is empty"
       required
     />
