@@ -1,7 +1,6 @@
 const validation = {
-  matchValidationValue: (value, regEx) => regEx.test(value),
+  matchValidationRule: (value, regEx) => regEx.test(value),
 
-  isString: () => { },
   isEmptyString: value => value === '',
 
   isNumeric: () => { },

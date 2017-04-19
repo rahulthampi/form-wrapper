@@ -6,6 +6,7 @@ import Validation from '../utils/validation';
 class FormInput extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       value: props.value || '',
       isValid: true,
@@ -13,22 +14,32 @@ class FormInput extends Component {
   }
 
   handleChange = (e) => {
-    // console.log(e.target.value);
     this.setState({
       value: e.target.value,
     });
   };
 
   validateInput = (e) => {
-    // console.log(e.target.value, validationRule);
     const { rule } = this.props;
-    this.setState({ isValid: !Validation[rule](e.target.value) });
+
+    this.setState({
+      isValid: !Validation[rule](e.target.value),
+    });
   }
 
   render() {
     const { isValid } = this.state;
-    const { className, name, label, type, placeholder, required, rule, msg } = this.props;
-    const wrapperClassName = `input-group ${className}`;
+    const {
+      className,
+      name,
+      label,
+      type,
+      placeholder,
+      required,
+      rule,
+      validationMessage,
+    } = this.props;
+    const wrapperClassName = `input-group ${className}${!isValid && 'validation-error'}`;
 
     return (
       <div className={wrapperClassName}>
@@ -38,11 +49,11 @@ class FormInput extends Component {
           name={name}
           value={this.state.value}
           onChange={this.handleChange}
-          onBlur={rule ? this.validateInput : null}
+          onBlur={rule && this.validateInput}
           placeholder={placeholder}
           required={required}
         />
-        {!isValid && <span className="error">{msg}</span>}
+        {!isValid && <span className="validation-error-message">{validationMessage}</span>}
       </div>
     );
   }
@@ -55,6 +66,8 @@ FormInput.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string,
   placeholder: PropTypes.string,
+  rule: PropTypes.string,
+  validationMessage: PropTypes.string,
   required: PropTypes.bool,
 };
 
@@ -64,6 +77,8 @@ FormInput.defaultProps = {
   label: undefined,
   value: undefined,
   placeholder: undefined,
+  rule: undefined,
+  validationMessage: undefined,
   required: false,
 };
 

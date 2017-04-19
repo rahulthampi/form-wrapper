@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const Form = ({ formID, submit, formTitle, children }) => (
-  <form id={formID} onSubmit={e => submit(e)}>
-    {formTitle && <div>{formTitle}</div>}
-    {' '}
-    {children}
-  </form>
-);
+class Form extends Component {
+  render = () => {
+    const { formID, submit, formTitle, children } = this.props;
+
+    return (
+      <form id={formID} onSubmit={e => submit(e)}>
+        {formTitle && <div><h4>{formTitle}</h4></div>}
+        {' '}
+        {children}
+      </form>
+    );
+  }
+}
 
 Form.propTypes = {
   formID: PropTypes.string.isRequired,
