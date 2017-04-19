@@ -3,12 +3,6 @@ import PropTypes from 'prop-types';
 
 const CreateFormHOC = (options = {}) => WrapperComponent =>
   class FormWrapper extends Component {
-    constructor(props) {
-      super(props);
-
-      this.submitHandler = this.submitHandler.bind(this);
-    }
-
     submitHandler = (e) => {
       e.preventDefault();
       const { submitForm } = this.props;
