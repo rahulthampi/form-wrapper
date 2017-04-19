@@ -7,7 +7,7 @@ class Form extends Component {
 
     return (
       <form id={formID} onSubmit={e => submit(e)}>
-        {formTitle && <div><h4>{formTitle}</h4></div>}
+        {formTitle && <div><h4 className="form-title">{formTitle}</h4></div>}
         {' '}
         {children}
       </form>
