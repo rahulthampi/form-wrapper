@@ -17,8 +17,9 @@ const validation = {
     return validation.matchValidationRule(value, RegExp.Numeric);
   },
   isAlphabetic: value => validation.matchValidationRule(value, RegExp.Alphabetic),
-  isWords: value => validation.matchValidationRule(value, RegExp.Words),
+  isAlphabeticWords: value => validation.matchValidationRule(value, RegExp.AlphabeticWords),
   isAlphaNumeric: value => validation.matchValidationRule(value, RegExp.AlphaNumeric),
+  isPassWord: value => validation.matchValidationRule(value, RegExp.Password),
   isDate: value => validation.matchValidationRule(value, RegExp.Date),
   isTime: value => validation.matchValidationRule(value, RegExp.Time),
   isDateTime: value => validation.matchValidationRule(value, RegExp.DateTime),

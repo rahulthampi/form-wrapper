@@ -26,10 +26,7 @@ const CreateFormHOC = (options = {}) => WrapperComponent =>
     }
 
     render = () =>
-      // console.dir(options.formElements);
-      (
-        <WrapperComponent submit={this.submitHandler} />
-      )
+      <WrapperComponent submit={this.submitHandler} />
 
     static propTypes = {
       submitForm: PropTypes.func.isRequired,
