@@ -1,78 +1,75 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Validation from '../utils/validation';
-
 class FormInput extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      value: props.value || '',
+      inputValue: props.value || '',
       isValid: true,
     };
   }
 
-  handleChange = (e) => {
-    const { rule } = this.props;
-
+  handleInputChange = (e) => {
+    // handle individual input change here
     this.setState({
-      value: e.target.value,
-      isValid: Validation[rule](e.target.value),
+      inputValue: e.target.value,
     });
-  };
+  }
 
-  render() {
-    const { isValid } = this.state;
+  handleInputBlur = (e, rule) => {
+    this.setState({
+      isValid: this.props.validator(e.target.value, rule),
+    });
+  }
+
+  render = () => {
+    const { inputValue,
+      isValid,
+    } = this.state;
     const {
+      validator,
+      validation,
+      errorMessage,
       className,
-      name,
       label,
-      type,
-      placeholder,
-      required,
-      validationMessage,
+      name,
+      ...inputProps
     } = this.props;
-    const wrapperClassName = `input-group ${className}${!isValid && 'validation-error'}`;
+    const wrapperClassName = `input-group ${className}`;
 
     return (
       <div className={wrapperClassName}>
         {label && <label htmlFor={name}>{label}</label>}
         <input
-          type={type}
+          value={inputValue}
+          onChange={this.handleInputChange}
+          onBlur={validation && (e => this.handleInputBlur(e, validation))}
           name={name}
-          value={this.state.value}
-          onChange={this.handleChange}
-          placeholder={placeholder}
-          required={required}
+          {...inputProps}
         />
-        {!isValid && <span className="validation-error-message">{validationMessage}</span>}
+        {!isValid && <span className="error-message">{errorMessage}</span>}
       </div>
     );
   }
 }
 
 FormInput.propTypes = {
-  name: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  validation: PropTypes.string,
+  errorMessage: PropTypes.string,
   className: PropTypes.string,
   label: PropTypes.string,
-  type: PropTypes.string,
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-  rule: PropTypes.string,
-  validationMessage: PropTypes.string,
-  required: PropTypes.bool,
+  name: PropTypes.string.isRequired,
 };
 
 FormInput.defaultProps = {
-  className: '',
   type: 'text',
-  label: undefined,
   value: undefined,
-  placeholder: undefined,
-  rule: undefined,
-  validationMessage: undefined,
-  required: false,
+  validation: undefined,
+  errorMessage: undefined,
+  className: undefined,
+  label: undefined,
 };
 
 export default FormInput;

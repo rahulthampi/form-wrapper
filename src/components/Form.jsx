@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Form extends Component {
-  render = () => {
-    const { formID, submit, formTitle, children } = this.props;
+  submit = (e) => {
+    e.preventDefault();
+    this.props.submit(e);
+  }
+
+  render() {
+    const { formID, formTitle } = this.props;
 
     return (
-      <form id={formID} onSubmit={e => submit(e)}>
-        {formTitle && <div><h4 className="form-title">{formTitle}</h4></div>}
-        {' '}
-        {children}
+      <form id={formID} onSubmit={e => this.submit(e)}>
+        {formTitle && <div className="form-title"><h3>{formTitle}</h3></div>}
+        {this.props.children}
+        <button type="submit" className={`${formID}-btn`}>Submit</button>
       </form>
     );
   }
@@ -17,8 +22,8 @@ class Form extends Component {
 
 Form.propTypes = {
   formID: PropTypes.string.isRequired,
-  submit: PropTypes.func.isRequired,
   children: PropTypes.array.isRequired,
+  submit: PropTypes.func.isRequired,
   formTitle: PropTypes.string,
 };
 

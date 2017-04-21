@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Validation from '../utils/validation';
+
 const CreateFormHOC = (options = {}) => WrapperComponent =>
   class FormWrapper extends Component {
     submitHandler = (e) => {
-      e.preventDefault();
       const { submitForm } = this.props;
       const formId = e.target.id;
       const formValues = [...e.target.elements]
@@ -15,12 +16,17 @@ const CreateFormHOC = (options = {}) => WrapperComponent =>
         }), { formId });
 
       submitForm(
-        formValues,
+        JSON.stringify(formValues, null, 4),
       );
     }
 
+    runValidator = (value, rule) => Validation[rule](value)
+
     render = () =>
-      <WrapperComponent submit={this.submitHandler} />
+      <WrapperComponent
+        submit={this.submitHandler}
+        validator={this.runValidator}
+      />
 
     static propTypes = {
       submitForm: PropTypes.func.isRequired,

@@ -4,7 +4,7 @@ const regExp = {
   Numeric: /^[0-9]+$/,
   Alphabetic: /^[A-Za-z]+$/,
   AlphabeticWords: /^[A-Za-z\s]+$/,
-  AlphaNumeric: /^[A-Za-z0-9]+$/,
+  AlphaNumeric: /^[A-Za-z0-9_]+$/,
   Password: /^[\s\S]{8,32}$/,
   Date: '',
   Time: '',

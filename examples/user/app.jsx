@@ -10,7 +10,7 @@ const RegisterForm = CreateFormHOC()(Register);
 
 class App extends Component {
   handleSubmission = (data) => {
-    alert(JSON.stringify(data, null, 4));
+    alert(data);
   }
 
   render() {
