@@ -1,9 +1,9 @@
-import CreateFormHOC from './container/CreateFormHOC';
+import CreateForm from './HOC/FormWrapper';
 import Form from './components/Form';
-import Input from './components/Input';
+import Textbox from './components/Textbox';
 
 export {
-  CreateFormHOC,
+  CreateForm,
   Form,
-  Input,
+  Textbox,
 };

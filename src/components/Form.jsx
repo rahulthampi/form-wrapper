@@ -2,32 +2,33 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Form extends Component {
-  submit = (e) => {
-    e.preventDefault();
-    this.props.submit(e);
-  }
-
   render() {
-    const { formID, formTitle } = this.props;
+    const { formID, formTitle, submit, submitText, children } = this.props;
 
     return (
-      <form id={formID} onSubmit={e => this.submit(e)}>
-        {formTitle && <div className="form-title"><h3>{formTitle}</h3></div>}
-        {this.props.children}
-        <button type="submit" className={`${formID}-btn`}>Submit</button>
+      <form id={formID} onSubmit={submit}>
+        {formTitle &&
+          <div className="form-title">
+            <h3>{formTitle}</h3>
+          </div>
+        }
+        {children}
+        <button type="submit" className={`${formID}-btn`}>{submitText}</button>
       </form>
     );
   }
 }
 
 Form.propTypes = {
-  formID: PropTypes.string.isRequired,
-  children: PropTypes.array.isRequired,
   submit: PropTypes.func.isRequired,
+  children: PropTypes.array.isRequired,
+  formID: PropTypes.string.isRequired,
+  submitText: PropTypes.string,
   formTitle: PropTypes.string,
 };
 
 Form.defaultProps = {
+  submitText: 'Submit',
   formTitle: undefined,
 };
 

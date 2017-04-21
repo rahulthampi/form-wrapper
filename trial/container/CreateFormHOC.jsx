@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/* import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Validation from '../utils/validation';
@@ -33,4 +33,4 @@ const CreateFormHOC = (options = {}) => WrapperComponent =>
     };
   };
 
-export default CreateFormHOC;
+export default CreateFormHOC;*/

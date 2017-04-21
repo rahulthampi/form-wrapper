@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input } from 'form-wrapper';
+import { Form, Textbox } from 'form-wrapper';
 
-const Register = ({ submit, validator }) => (
-  <Form formID="userRegistration" submit={submit} formTitle="User Registration">
-    <Input label="Name" name="userName" placeholder="Name" />
-    <Input label="UserID" name="userID" placeholder="UserID" validator={validator} validation="isAlphaNumeric" errorMessage="not a username" />
-    <Input label="EmailID" name="userEmail" placeholder="Email address" validator={validator} validation="isEmail" errorMessage="not a mail" />
-    <Input type="password" label="Password" name="userPassword" placeholder="Password" />
-    <Input type="password" label="Confirm Password" name="userConfirmPassword" placeholder="Confirm Password" />
+const Register = ({ onSubmit, onBlur }) => (
+  <Form formID="userRegistration" submit={onSubmit} formTitle="User Registration">
+    <Textbox label="Name" name="userName" placeholder="Name" />
+    <Textbox label="UserID" name="userID" placeholder="UserID" />
+    <Textbox label="EmailID" name="userEmail" onBlur={onBlur} data-validation="isEmail" data-validationError="This is not a valid email" placeholder="Email address" />
+    <Textbox type="password" label="Password" name="userPassword" placeholder="Password" />
+    <Textbox type="password" label="Confirm Password" name="userConfirmPassword" placeholder="Confirm Password" data-validation="isEqual:userPassword" data-validationError="Passwords does not match" />
   </Form>
 );
 
 Register.propTypes = {
-  submit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default Register;

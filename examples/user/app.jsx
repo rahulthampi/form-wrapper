@@ -1,28 +1,19 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { CreateFormHOC } from 'form-wrapper';
+import { CreateForm } from 'form-wrapper';
 
-import Login from './Login';
 import Register from './Register';
 
-const LoginForm = CreateFormHOC()(Login);
-const RegisterForm = CreateFormHOC()(Register);
+const RegisterForm = CreateForm(Register);
 
 class App extends Component {
   handleSubmission = (data) => {
     alert(data);
   }
 
-  render() {
-    return (
-      <div>
-        <LoginForm submitForm={this.handleSubmission} />
-        <br />
-        <br />
-        <RegisterForm submitForm={this.handleSubmission} />
-      </div>
-    );
-  }
+  render = () => (
+    <RegisterForm submitForm={this.handleSubmission} />
+  )
 }
 
 render(
