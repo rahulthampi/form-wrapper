@@ -6,6 +6,7 @@ class Textbox extends Component {
     super(props);
     this.state = {
       inputValue: props.value || '',
+      isInputValid: true,
     };
   }
 
@@ -16,12 +17,24 @@ class Textbox extends Component {
     });
   }
 
+  handleInputBlur = (e, validation) => {
+    this.setState({
+      isInputValid: this.props.isValid(e, validation),
+    });
+  }
+
   render() {
-    const { inputValue } = this.state;
+    const { 
+      inputValue,
+      isInputValid
+    } = this.state;
     const {
       label,
       name,
       className,
+      validation,
+      isValid,
+      error,
       ...inputProps
     } = this.props;
     const wrapperClassName = `input-group ${className}`;
@@ -32,9 +45,11 @@ class Textbox extends Component {
         <input
           value={inputValue}
           onChange={this.handleInputChange}
+          onBlur={validation && (e => this.handleInputBlur(e, validation))}
           name={name}
           {...inputProps}
         />
+        {!isInputValid && <span className="validation-error">{error}</span>}
       </div>
     );
   }

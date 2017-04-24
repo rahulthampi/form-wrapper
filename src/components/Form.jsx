@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Form extends Component {
   render() {
-    const { formID, formTitle, submit, submitText, children } = this.props;
+    const { formID, formTitle, submit, submitText, children, canSubmit } = this.props;
 
     return (
       <form id={formID} onSubmit={submit}>
@@ -13,7 +13,7 @@ class Form extends Component {
           </div>
         }
         {children}
-        <button type="submit" className={`${formID}-btn`}>{submitText}</button>
+        <button type="submit" className={`${formID}-btn`} disabled={!canSubmit}>{submitText}</button>
       </form>
     );
   }
