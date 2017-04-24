@@ -12,21 +12,22 @@ class Textbox extends Component {
 
   handleInputChange = (e) => {
     // handle individual input change here
+    // setting formValues from here
+
+    // TODO: need to work on setting values from here
     const target = e.target.name;
     const newValue = e.target.value;
-    this.props.setFormValues(target, newValue);
 
     this.setState({
       inputValue: newValue,
     });
+    this.props.setFormValues(target, newValue);
   }
 
   handleInputBlur = (e, validation) => {
-    if (this.props.validation) {
-      this.setState({
-        isInputValid: this.props.isValid(e, validation),
-      });
-    }
+    this.setState({
+      isInputValid: this.props.isValid(e, validation),
+    });
   }
 
   render() {
@@ -52,7 +53,7 @@ class Textbox extends Component {
         <input
           value={inputValue}
           onChange={this.handleInputChange}
-          onBlur={e => this.handleInputBlur(e, validation)}
+          onBlur={validation && (e => this.handleInputBlur(e, validation))}
           name={name}
           {...inputProps}
         />
@@ -64,6 +65,7 @@ class Textbox extends Component {
 
 Textbox.propTypes = {
   name: PropTypes.string.isRequired,
+  setFormValues: PropTypes.func.isRequired,
   type: PropTypes.string,
   value: PropTypes.string,
   className: PropTypes.string,
