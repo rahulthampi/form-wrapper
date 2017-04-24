@@ -24,9 +24,9 @@ class Textbox extends Component {
   }
 
   render() {
-    const { 
+    const {
       inputValue,
-      isInputValid
+      isInputValid,
     } = this.state;
     const {
       label,
@@ -61,6 +61,9 @@ Textbox.propTypes = {
   value: PropTypes.string,
   className: PropTypes.string,
   label: PropTypes.string,
+  validation: PropTypes.string,
+  error: PropTypes.string,
+  isValid: PropTypes.func,
 };
 
 Textbox.defaultProps = {
@@ -68,6 +71,9 @@ Textbox.defaultProps = {
   value: undefined,
   className: undefined,
   label: undefined,
+  validation: undefined,
+  error: undefined,
+  isValid: undefined,
 };
 
 export default Textbox;

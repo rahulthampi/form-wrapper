@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 
 class Form extends Component {
   render() {
-    const { formID, formTitle, submit, submitText, children, canSubmit } = this.props;
+    const { formID,
+      formTitle,
+      submit,
+      submitText,
+      children,
+      canSubmit,
+    } = this.props;
 
     return (
       <form id={formID} onSubmit={submit}>
@@ -25,11 +31,13 @@ Form.propTypes = {
   formID: PropTypes.string.isRequired,
   submitText: PropTypes.string,
   formTitle: PropTypes.string,
+  canSubmit: PropTypes.bool,
 };
 
 Form.defaultProps = {
   submitText: 'Submit',
   formTitle: undefined,
+  canSubmit: true,
 };
 
 export default Form;
