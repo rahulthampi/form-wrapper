@@ -12,15 +12,21 @@ class Textbox extends Component {
 
   handleInputChange = (e) => {
     // handle individual input change here
+    const target = e.target.name;
+    const newValue = e.target.value;
+    this.props.setFormValues(target, newValue);
+
     this.setState({
-      inputValue: e.target.value,
+      inputValue: newValue,
     });
   }
 
   handleInputBlur = (e, validation) => {
-    this.setState({
-      isInputValid: this.props.isValid(e, validation),
-    });
+    if (this.props.validation) {
+      this.setState({
+        isInputValid: this.props.isValid(e, validation),
+      });
+    }
   }
 
   render() {
@@ -35,6 +41,7 @@ class Textbox extends Component {
       validation,
       isValid,
       error,
+      setFormValues,
       ...inputProps
     } = this.props;
     const wrapperClassName = `input-group ${className}`;
@@ -45,7 +52,7 @@ class Textbox extends Component {
         <input
           value={inputValue}
           onChange={this.handleInputChange}
-          onBlur={validation && (e => this.handleInputBlur(e, validation))}
+          onBlur={e => this.handleInputBlur(e, validation)}
           name={name}
           {...inputProps}
         />

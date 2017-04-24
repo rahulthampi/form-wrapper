@@ -11,7 +11,10 @@ const validation = {
   isUndefined: value => value === undefined,
 
   isEmptyString: value => value === '',
-  isEqual: (value, valueOne) => value === valueOne,
+  isEqualTo: (value, valueOne) => {
+    console.log(valueOne);
+    // return value === valueOne;
+  },
   isNumeric: (value) => {
     if (typeof value === 'number') return true;
     return validation.matchValidationRule(value, RegExp.Numeric);

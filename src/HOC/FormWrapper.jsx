@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Helpers from '../utils/helpers';
 import Validation from '../utils/validation';
 
 const CreateForm = WrapperComponent => (
@@ -10,19 +11,23 @@ const CreateForm = WrapperComponent => (
       this.state = {
         canSubmit: false,
         isSubmitted: false,
+        formValues: {},
       };
+    }
+
+    setFormValues = (target, value) => {
+      this.setState({
+        formValues: ({
+          ...this.state.formValues,
+          [target]: value,
+        }),
+      });
     }
 
     handleSubmitForm = (e) => {
       e.preventDefault();
       const { submitForm } = this.props;
-      const formID = e.target.id;
-      const formElements = [...e.target.elements].filter(el => el.type !== 'submit');
-      const formValues = formElements
-        .reduce((acc, el) => ({
-          ...acc,
-          [el.name]: el.value,
-        }), { formID });
+      const formValues = Helpers.formToJSON(e.target);
 
       // TODO: handle form submit here
       submitForm(
@@ -30,14 +35,21 @@ const CreateForm = WrapperComponent => (
       );
     }
 
-    handleValidation = (e, rule) => {
+    handleValidation = (e, validationParams) => {
+      const params = Helpers.splitter(validationParams, ':');
+      const [rule, ...valParams] = params;
       const target = e.target.name;
       const value = e.target.value;
 
-      if (typeof Validation[rule] !== 'function') {
+      if (!Validation[rule] && typeof Validation[rule] !== 'function') {
         console.error(`FormWrapper: Validation rule '${rule}' for '${target}' is invalid`);
         return false;
       }
+
+      if (params.length > 1) {
+        return Validation[rule](value, valParams);
+      }
+
       return Validation[rule](value);
     }
 
@@ -46,6 +58,8 @@ const CreateForm = WrapperComponent => (
         onSubmit={this.handleSubmitForm}
         canSubmit={this.state.canSubmit}
         isValid={this.handleValidation}
+        formValues={this.state.formValues}
+        setFormValues={this.setFormValues}
       />
     )
 

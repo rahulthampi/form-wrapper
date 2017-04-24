@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 class Form extends Component {
   render() {
-    const { formID,
+    const {
+      formID,
       formTitle,
       submit,
       submitText,
