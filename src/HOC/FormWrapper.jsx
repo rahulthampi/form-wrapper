@@ -36,18 +36,18 @@ const CreateForm = WrapperComponent => (
     }
 
     handleValidation = (e, validationParams) => {
-      const params = Helpers.splitter(validationParams, ':');
-      const [rule, ...valParams] = params;
+      const [rule, ...valParams] = validationParams;
       const target = e.target.name;
       const value = e.target.value;
+      const { formValues } = this.state;
 
       if (!Validation[rule] && typeof Validation[rule] !== 'function') {
         console.error(`FormWrapper: Validation rule '${rule}' for '${target}' is invalid`);
         return false;
       }
 
-      if (params.length > 1) {
-        return Validation[rule](value, valParams);
+      if (validationParams.length > 1) {
+        return Validation[rule](formValues, value, valParams);
       }
 
       return Validation[rule](value);

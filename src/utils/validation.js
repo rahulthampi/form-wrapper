@@ -10,13 +10,12 @@ const validation = {
   isNull: value => value === null,
   isUndefined: value => value === undefined,
 
-  isEmptyString: value => value === '',
-  isEqualTo: (value, valueOne) => {
-    console.log(valueOne);
-    // return value === valueOne;
-  },
+  isString: value => typeof value === 'string' && value !== '',
+  isEmptyString: value => typeof value === 'string' && value === '',
+  isEqual: (value, valueOne) => value === valueOne,
+  isEqualToField: (values, value, valueOne) => value === values[valueOne],
   isNumeric: (value) => {
-    if (typeof value === 'number') return true;
+    if (typeof value !== 'number') return false;
     return validation.matchValidationRule(value, RegExp.Numeric);
   },
   isAlphabetic: value => validation.matchValidationRule(value, RegExp.Alphabetic),

@@ -25,9 +25,15 @@ class Textbox extends Component {
   }
 
   handleInputBlur = (e, validation) => {
-    this.setState({
-      isInputValid: this.props.isValid(e, validation),
-    });
+    const target = e.target.name;
+    const newValue = e.target.value;
+
+    if (this.props.validation) {
+      this.setState({
+        isInputValid: this.props.isValid(e, validation),
+      });
+    }
+    this.props.setFormValues(target, newValue);
   }
 
   render() {
@@ -53,7 +59,7 @@ class Textbox extends Component {
         <input
           value={inputValue}
           onChange={this.handleInputChange}
-          onBlur={validation && (e => this.handleInputBlur(e, validation))}
+          onBlur={e => this.handleInputBlur(e, validation)}
           name={name}
           {...inputProps}
         />
@@ -70,7 +76,7 @@ Textbox.propTypes = {
   value: PropTypes.string,
   className: PropTypes.string,
   label: PropTypes.string,
-  validation: PropTypes.string,
+  validation: PropTypes.array,
   error: PropTypes.string,
   isValid: PropTypes.func,
 };
