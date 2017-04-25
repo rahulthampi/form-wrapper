@@ -1,11 +1,21 @@
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+const findFolders = srcPath => fs.readdirSync(srcPath)
+  .filter(file => fs.statSync(path.join(srcPath, file)).isDirectory())
+  .reduce((entries, directory) => {
+    const entryPoints = entries;
+    entryPoints[directory] = path.resolve(__dirname, directory, 'app.jsx');
+    return entryPoints;
+  }, {});
+console.log(findFolders(__dirname));
+
 module.exports = {
   devtool: 'inline-source-map',
 
-  entry: path.resolve(__dirname, 'user', 'app.jsx'),
+  entry: findFolders(__dirname),
 
   output: {
     path: path.resolve(__dirname, '__build__'),
