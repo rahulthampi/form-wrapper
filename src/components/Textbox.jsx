@@ -12,28 +12,36 @@ class Textbox extends Component {
 
   handleInputChange = (e) => {
     // handle individual input change here
-    // setting formValues from here
-
-    // TODO: need to work on setting values from here
-    const target = e.target.name;
-    const newValue = e.target.value;
+    const target = e.target;
+    const { isInputValid } = this.state;
 
     this.setState({
-      inputValue: newValue,
+      inputValue: target.value,
+    }, () => {
+      // TODO: need to rethink on setting values from here
+      this.props.setFormValues(target, isInputValid);
     });
-    this.props.setFormValues(target, newValue);
   }
 
-  handleInputBlur = (e, validation) => {
-    const target = e.target.name;
-    const newValue = e.target.value;
+  handleInputBlur = (e) => {
+    const {
+      validation,
+      isValid,
+      setFormValues,
+    } = this.props;
+    const { isInputValid } = this.state;
+    const target = e.target;
 
-    if (this.props.validation) {
+    if (validation) {
       this.setState({
-        isInputValid: this.props.isValid(e, validation),
+        isInputValid: isValid(target, validation),
+      }, () => {
+        // TODO: need to rethink on setting values from here
+        setFormValues(target, isInputValid);
       });
     }
-    this.props.setFormValues(target, newValue);
+    // TODO: need to rethink on setting values from here
+    setFormValues(target, isInputValid);
   }
 
   render() {
@@ -59,7 +67,7 @@ class Textbox extends Component {
         <input
           value={inputValue}
           onChange={this.handleInputChange}
-          onBlur={e => this.handleInputBlur(e, validation)}
+          onBlur={this.handleInputBlur}
           name={name}
           {...inputProps}
         />

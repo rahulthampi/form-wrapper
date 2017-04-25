@@ -9,17 +9,20 @@ const CreateForm = WrapperComponent => (
     constructor(props) {
       super(props);
       this.state = {
-        canSubmit: false,
         isSubmitted: false,
         formValues: {},
+        canSubmit: false,
       };
     }
 
-    setFormValues = (target, value) => {
+    setFormValues = (target, isInputValid) => {
       this.setState({
         formValues: ({
           ...this.state.formValues,
-          [target]: value,
+          [target.name]: {
+            value: target.value,
+            isInputValid,
+          },
         }),
       });
     }
@@ -35,28 +38,26 @@ const CreateForm = WrapperComponent => (
       );
     }
 
-    handleValidation = (e, validationParams) => {
+    handleValidation = (target, validationParams) => {
+      const targetName = target.name;
+      const targetValue = target.value;
       const [rule, ...valParams] = validationParams;
-      const target = e.target.name;
-      const value = e.target.value;
       const { formValues } = this.state;
 
       if (!Validation[rule] && typeof Validation[rule] !== 'function') {
-        console.error(`FormWrapper: Validation rule '${rule}' for '${target}' is invalid`);
-        return false;
+        return Helpers.throwError(`FormWrapper: Validation rule '${rule}' for '${targetName}' is invalid`);
       }
 
       if (validationParams.length > 1) {
-        return Validation[rule](formValues, value, valParams);
+        return Validation[rule](formValues, targetValue, valParams);
       }
 
-      return Validation[rule](value);
+      return Validation[rule](targetValue);
     }
 
     render = () => (
       <WrapperComponent
         onSubmit={this.handleSubmitForm}
-        canSubmit={this.state.canSubmit}
         isValid={this.handleValidation}
         formValues={this.state.formValues}
         setFormValues={this.setFormValues}
